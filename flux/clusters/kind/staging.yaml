@@ -6,7 +6,7 @@ metadata:
 spec:
   interval: 1m
   path: "./apps/overlays/staging/nginx"
-  targetNamespace: staging-app
+  targetNamespace: staging
   prune: true
   sourceRef:
     kind: GitRepository
