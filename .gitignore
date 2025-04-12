@@ -1,0 +1,18 @@
+# Terraform state files
+*.tfstate
+*.tfstate.*
+*.terraform.lock.hcl
+
+# Terraform directories
+.terraform/
+
+# Ignore overriding files explicitly created within subdirectories too
+**/*.tfstate
+**/*.tfstate.*
+**/.terraform.lock.hcl
+
+# Optional logs or crash files
+crash.log
+terraform.tfvars
+*.tfvars
+.terraformrc
