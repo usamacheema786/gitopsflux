@@ -24,14 +24,12 @@ spec:
         replication_factor: 1
       storage:
         type: 'filesystem'
-    deploymentMode: SingleBinary
-    simpleScalable:
-      enabled: false  # Must explicitly disable
+    # SingleBinary configuration
     singleBinary:
-      enabled: true
-      replicas: 1
+      enabled: true  # Explicitly enable
+      replicas: 1    # Single replica for development
       persistence:
-        enabled: false
+        enabled: false  # Disable for demo, enable for production
       resources:
         limits:
           cpu: 500m
@@ -39,3 +37,7 @@ spec:
         requests:
           cpu: 200m
           memory: 512Mi
+    # Explicitly disable other modes
+    simpleScalable:
+      enabled: false  # Must be explicitly disabled
+      replicas: 0     # Ensure zero replicas
