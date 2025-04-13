@@ -26,6 +26,7 @@ spec:
         type: 'filesystem'
       limits_config:
         retention_period: 24h
+        allow_structured_metadata: false  # Disabled for v11 schema
       # https://grafana.com/docs/loki/latest/setup/install/helm/install-monolithic/
       schemaConfig:
         configs:
