@@ -12,7 +12,7 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: loki
-        namespace: flux-system
+        namespace: logging
   install:
     remediation:
       retries: 3
