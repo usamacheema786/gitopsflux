@@ -3,3 +3,4 @@ kind: Kustomization
 resources:
   - loki/release.yaml
   - promtail/release.yaml
+  - kustomization.yaml
