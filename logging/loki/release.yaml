@@ -36,13 +36,16 @@ spec:
             index:
               prefix: index_
               period: 24h
-        ruler:
-          storage:
-            type: local
-            local:
-              directory: /tmp/loki/rules  # Using /tmp which is writable in Kind
 
+    # Ruler configuration moved to correct section
+    ruler:
+      enable_api: true
+      storage:
+        type: local
+        local:
+          directory: /tmp/loki/rules
     # SingleBinary configuration
+
     deploymentMode: SingleBinary
     lokiCanary:
       enabled: false
