@@ -68,6 +68,8 @@ spec:
       extraVolumeMounts:
         - name: tmp-storage
           mountPath: /tmp/loki
+        - name: tmp-storage
+          mountPath: /var/loki  # <--- Add this lin
       resources:
         limits:
           cpu: 500m
