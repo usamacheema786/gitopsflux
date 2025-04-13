@@ -38,6 +38,12 @@ spec:
               period: 24h
 
     # Ruler configuration moved to correct section
+    chunksCache:
+      enabled: false
+    resultsCache:
+      enabled: false
+    test:
+      enabled: false
     ruler:
       enable_api: true
       storage:
