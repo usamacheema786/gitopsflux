@@ -25,6 +25,7 @@ spec:
       storage:
         type: 'filesystem'
     # SingleBinary configuration
+    deploymentMode: SingleBinary
     singleBinary:
       enabled: true  # Explicitly enable
       replicas: 1    # Single replica for development
