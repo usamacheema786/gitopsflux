@@ -44,6 +44,8 @@ spec:
 
     # SingleBinary configuration
     deploymentMode: SingleBinary
+    lokiCanary:
+      enabled: false
     singleBinary:
       enabled: true  # Explicitly enable
       replicas: 1    # Single replica for development
