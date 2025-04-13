@@ -61,6 +61,12 @@ spec:
       replicas: 1    # Single replica for development
       persistence:
         enabled: false  # Disable for demo, enable for production
+      extraVolumes:
+        - name: tmp-storage
+          emptyDir: { }
+      extraVolumeMounts:
+        - name: tmp-storage
+          mountPath: /tmp/loki
       resources:
         limits:
           cpu: 500m
