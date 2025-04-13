@@ -25,9 +25,7 @@ spec:
       storage:
         type: 'filesystem'
       limits_config:
-        allow_structured_metadata: true
         retention_period: 24h
-        volume_enabled: true
       # https://grafana.com/docs/loki/latest/setup/install/helm/install-monolithic/
       schemaConfig:
         configs:
@@ -38,10 +36,16 @@ spec:
             index:
               prefix: loki_index_
               period: 24h
-      pattern_ingester:
-        enabled: true
-      ruler:
-        enable_api: true
+    config:
+      storage_config:
+        filesystem:
+          chunks_directory: /var/loki/chunks
+          rules_directory: /var/loki/rules
+      ingester:
+        lifecycler:
+          ring:
+            kvstore:
+              store: inmemory
     # SingleBinary configuration
     deploymentMode: SingleBinary
     singleBinary:
