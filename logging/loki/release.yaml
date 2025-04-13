@@ -46,11 +46,12 @@ spec:
     test:
       enabled: false
     ruler:
-      enable_api: true
-      storage:
-        type: local
-        local:
-          directory: /tmp/loki/rules
+      enabled: false
+#      enable_api: true
+#      storage:
+#        type: local
+#        local:
+#          directory: /tmp/loki/rules
     # SingleBinary configuration
 
     deploymentMode: SingleBinary
