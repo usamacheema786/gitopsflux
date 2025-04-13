@@ -24,6 +24,9 @@ spec:
         replication_factor: 1
       storage:
         type: 'filesystem'
+    deploymentMode: SingleBinary
+    simpleScalable:
+      enabled: false  # Must explicitly disable
     singleBinary:
       replicas: 1
       persistence:
