@@ -1,22 +1,4 @@
 # main.tf
-terraform {
-  required_providers {
-    kind = {
-      source  = "tehcyx/kind"
-      version = "0.2.1"
-    }
-    kubernetes = {
-      source  = "hashicorp/kubernetes"
-      version = "2.23.0"
-    }
-  }
-}
-
-provider "kubernetes" {
-  config_path = "../kubeconfig"
-}
-provider "kind" {}
-
 resource "kind_cluster" "default" {
   name            = var.cluster_name
   node_image      = var.node_image
@@ -24,66 +6,53 @@ resource "kind_cluster" "default" {
   wait_for_ready  = true
 
   kind_config {
-    kind = "Cluster"
+    kind        = "Cluster"
     api_version = "kind.x-k8s.io/v1alpha4"
     node {
-      role = "control-plane"
-      kubeadm_config_patches = [<<EOF
-kind: ClusterConfiguration
-apiServer:
-  extraArgs:
-    authorization-mode: "Node,RBAC"
-controllerManager:
-  extraArgs:
-    bind-address: "0.0.0.0"
-scheduler:
-  extraArgs:
-    bind-address: "0.0.0.0"
-EOF
-      ]
+      role                   = "control-plane"
+      kubeadm_config_patches = local.kubeadm_patch
     }
     networking {
-      pod_subnet           = "10.244.0.0/16"
-      service_subnet       = "10.96.0.0/12"
-      disable_default_cni  = false
-      api_server_address   = "0.0.0.0"
-      api_server_port      = 6443
+      pod_subnet          = var.pod_subnet
+      service_subnet      = var.service_subnet
+      disable_default_cni = false
+      api_server_address  = "0.0.0.0"
+      api_server_port     = var.api_server_port
     }
   }
-  }
+}
 
-
-# Apply basic RBAC for default service account in default namespace
-resource "kubernetes_cluster_role_binding" "default_view" {
+resource "kubernetes_namespace" "staging" { #namespace for staging app
   depends_on = [kind_cluster.default]
-
   metadata {
-    name = "default-view"
-  }
-  role_ref {
-    api_group = "rbac.authorization.k8s.io"
-    kind      = "ClusterRole"
-    name      = "view"
-  }
-  subject {
-    kind      = "ServiceAccount"
-    name      = "default"
-    namespace = "default"
+    name = "staging"
+    labels = {
+      "pod-security.kubernetes.io/enforce"         = "restricted"
+      "pod-security.kubernetes.io/enforce-version" = "latest"
+    }
   }
 }
 
-# Create a NetworkPolicy to restrict pod-to-pod communication
-resource "kubernetes_network_policy" "default_deny" {
+resource "kubernetes_namespace" "logging" {
   depends_on = [kind_cluster.default]
-
   metadata {
-    name      = "default-deny"
-    namespace = "default"
-  }
-
-  spec {
-    pod_selector {}
-    policy_types = ["Ingress", "Egress"]
+    name = "logging"
+    labels = {
+      "pod-security.kubernetes.io/enforce"         = "restricted"
+      "pod-security.kubernetes.io/enforce-version" = "latest"
+    }
   }
 }
+
+resource "kubernetes_namespace" "monitoring" {
+  depends_on = [kind_cluster.default]
+  metadata {
+    name = "monitoring"
+    labels = {
+      "pod-security.kubernetes.io/enforce"         = "restricted"
+      "pod-security.kubernetes.io/enforce-version" = "latest"
+    }
+  }
+}
+
 
