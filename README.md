@@ -1,6 +1,5 @@
 # **GitOps with Flux on Kind (Kubernetes in Docker) - Complete Setup Guide**
 
-![GitOps with Flux](https://fluxcd.io/img/illustrations/fluxcd-diagram.png)
 
 ### Directory Structure
 ```
