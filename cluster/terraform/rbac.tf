@@ -1,3 +1,4 @@
+#rbac to restrict nginx deployment privileges
 resource "kubernetes_service_account" "nginx" {
   metadata {
     name      = "nginx-sa"

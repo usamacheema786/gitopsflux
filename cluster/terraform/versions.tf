@@ -1,3 +1,4 @@
+# required provider version to run the terraform modules
 terraform {
   required_providers {
     kind = {

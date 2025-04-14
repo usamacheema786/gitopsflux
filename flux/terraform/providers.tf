@@ -1,3 +1,4 @@
+# flux provider config
 provider "flux" {
   kubernetes = {
     config_path = var.kubeconfig_path
@@ -11,6 +12,7 @@ provider "flux" {
   }
 }
 
+# kubernetes provider config
 provider "kubernetes" {
   config_path = var.kubeconfig_path
   experiments {

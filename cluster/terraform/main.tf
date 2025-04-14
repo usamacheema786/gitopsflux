@@ -1,4 +1,4 @@
-# main.tf
+# kind cluster creation with basic config
 resource "kind_cluster" "default" {
   name            = var.cluster_name
   node_image      = var.node_image
@@ -27,29 +27,31 @@ resource "kubernetes_namespace" "staging" { #namespace for staging app
   metadata {
     name = "staging"
     labels = {
-      "pod-security.kubernetes.io/enforce"         = "restricted"
+      "pod-security.kubernetes.io/enforce"         = "restricted"   #Pod Security Admission labels
       "pod-security.kubernetes.io/enforce-version" = "latest"
     }
   }
 }
 
+# creating namespace for logging
 resource "kubernetes_namespace" "logging" {
   depends_on = [kind_cluster.default]
   metadata {
     name = "logging"
     labels = {
-      "pod-security.kubernetes.io/enforce"         = "restricted"
+      "pod-security.kubernetes.io/enforce"         = "restricted" #Pod Security Admission labels
       "pod-security.kubernetes.io/enforce-version" = "latest"
     }
   }
 }
 
+#creating namespace for monitoring
 resource "kubernetes_namespace" "monitoring" {
   depends_on = [kind_cluster.default]
   metadata {
     name = "monitoring"
     labels = {
-      "pod-security.kubernetes.io/enforce"         = "restricted"
+      "pod-security.kubernetes.io/enforce"         = "restricted" #Pod Security Admission labels
       "pod-security.kubernetes.io/enforce-version" = "latest"
     }
   }
