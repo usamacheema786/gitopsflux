@@ -15,9 +15,6 @@ spec:
         app: nginx
     spec:
       serviceAccountName: nginx-sa
-      securityContext:
-        seccompProfile:
-          type: RuntimeDefault
       affinity:
         podAntiAffinity:
           preferredDuringSchedulingIgnoredDuringExecution:
@@ -32,7 +29,7 @@ spec:
               topologyKey: kubernetes.io/hostname
       containers:
       - name: nginx
-        image: nginx:1.25
+        image: nginx:1.24
         ports:
         - containerPort: 80
         resources:
@@ -54,8 +51,3 @@ spec:
             port: 80
           initialDelaySeconds: 5
           periodSeconds: 5
-        securityContext:
-          allowPrivilegeEscalation: false
-          capabilities:
-            drop:
-              - ALL

@@ -4,3 +4,4 @@ resources:
   - helmrepositories.yaml
   - loki/release.yaml
   - promtail/release.yaml
+
