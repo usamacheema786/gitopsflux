@@ -7,8 +7,8 @@ resource "flux_bootstrap_git" "this" {
 
 #creating kustomization file for staging in specified directory
 resource "local_file" "staging_kustomize" {
-  filename = "../clusters/kind/staging.yaml"
-  content = local.kustomization_yaml
+  filename   = "../clusters/kind/staging.yaml"
+  content    = local.kustomization_yaml
   depends_on = [flux_bootstrap_git.this]
 }
 

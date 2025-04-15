@@ -16,6 +16,6 @@ provider "flux" {
 provider "kubernetes" {
   config_path = var.kubeconfig_path
   experiments {
-        manifest_resource = true
-    }
+    manifest_resource = true
+  }
 }

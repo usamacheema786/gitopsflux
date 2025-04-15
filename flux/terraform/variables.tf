@@ -8,7 +8,7 @@ variable "git_username" {
   description = "Username for Git authentication."
   type        = string
   sensitive   = true
-  default = "usamacheema786"
+  default     = "usamacheema786"
 }
 
 variable "git_token" {
@@ -20,5 +20,5 @@ variable "git_token" {
 variable "kubeconfig_path" {
   description = "Path to the kubeconfig file."
   type        = string
-  default = "../../cluster/kubeconfig"
+  default     = "../../cluster/kubeconfig"
 }

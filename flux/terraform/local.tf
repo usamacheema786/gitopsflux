@@ -7,7 +7,7 @@ metadata:
   namespace: flux-system
 spec:
   interval: 1m
-  path: "./apps/overlays/staging/nginx"
+  path: "./apps/environments/staging/nginx"
   targetNamespace: staging
   prune: true
   healthChecks:  # healthCheck to perform auto rollback when health check fails

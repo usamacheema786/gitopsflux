@@ -15,7 +15,7 @@ spec:
         app: nginx
     spec:
       serviceAccountName: nginx-sa
-      securityContext:  # 🔐 Pod-level context (still required for seccomp)
+      securityContext:
         seccompProfile:
           type: RuntimeDefault
       affinity:
@@ -54,9 +54,8 @@ spec:
             port: 80
           initialDelaySeconds: 5
           periodSeconds: 5
-        securityContext:  # 👈 Required container-level hardening
+        securityContext:
           allowPrivilegeEscalation: false
-          runAsNonRoot: true
           capabilities:
             drop:
               - ALL
