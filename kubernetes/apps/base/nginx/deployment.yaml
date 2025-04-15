@@ -15,6 +15,9 @@ spec:
         app: nginx
     spec:
       serviceAccountName: nginx-sa
+      securityContext:
+        seccompProfile:
+          type: RuntimeDefault
       affinity:
         podAntiAffinity:
           preferredDuringSchedulingIgnoredDuringExecution:
